@@ -26,6 +26,14 @@
                     <h1>CorpHR<span class="dot">.</span></h1>
                 </div>
                 <div class="header-actions">
+                    <div class="sort-controls">
+                        <select id="sortDropdown" class="select-sort">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="alpha-asc">Alphabetic (A-Z)</option>
+                            <option value="alpha-desc">Alphabetic (Z-A)</option>
+                        </select>
+                    </div>
                     <div class="search-bar">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -83,10 +91,10 @@
                         <table id="employeeTable">
                             <thead>
                                 <tr>
-                                    <th>Emp ID</th>
-                                    <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Gender</th>
+                                    <th class="sortable" data-sort="id">Emp ID <span class="sort-icon"></span></th>
+                                    <th class="sortable" data-sort="name">Name <span class="sort-icon"></span></th>
+                                    <th class="sortable" data-sort="salary">Salary <span class="sort-icon"></span></th>
+                                    <th class="sortable" data-sort="gender">Gender <span class="sort-icon"></span></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>

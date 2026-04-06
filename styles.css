@@ -80,6 +80,28 @@ body {
     align-items: center;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select-sort {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    background-color: var(--color-bg-surface);
+    color: var(--color-text-main);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.select-sort:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -259,6 +281,37 @@ th {
     color: var(--color-text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    position: relative;
+}
+
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--transition-fast);
+}
+
+th.sortable:hover {
+    background-color: var(--color-border);
+    color: var(--color-primary);
+}
+
+.sort-icon::after {
+    content: "↕";
+    margin-left: 8px;
+    opacity: 0.3;
+    font-size: 0.8rem;
+}
+
+th.asc .sort-icon::after {
+    content: "↑";
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+th.desc .sort-icon::after {
+    content: "↓";
+    opacity: 1;
+    color: var(--color-primary);
 }
 
 th:first-child {
