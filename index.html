@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <meta name="description" content="A comprehensive employee data management application.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                    <h1>CorpHR<span class="dot">.</span></h1>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Search employees...">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Summary Widgets -->
+            <section class="summary-section">
+                <div class="summary-card">
+                    <div class="card-icon blue-bg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Total Employees</span>
+                        <h2 id="totalEmployees">0</h2>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-icon green-bg">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" x2="12" y1="2" y2="22" />
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                        </svg>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-label">Total Salary</span>
+                        <h2 id="totalSalary">$0</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workspace Layout -->
+            <section class="workspace">
+                <!-- Data Table -->
+                <div class="table-container fade-in">
+                    <div class="section-header">
+                        <h2>Employee Directory</h2>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="employeeTable">
+                            <thead>
+                                <tr>
+                                    <th>Emp ID</th>
+                                    <th>Name</th>
+                                    <th>Salary</th>
+                                    <th>Gender</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeList">
+                                <!-- Dynamic Rows Go Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Form Panel -->
+                <div class="form-container slide-in">
+                    <div class="section-header">
+                        <h2 id="formTitle">Add New Employee</h2>
+                        <span id="editBadge" class="badge hidden">Edit Mode</span>
+                    </div>
+                    <form id="employeeForm">
+                        <div class="form-group">
+                            <label for="empId">Employee ID</label>
+                            <input type="number" id="empId" name="empId" placeholder="e.g. 1001" required>
+                            <small class="error-msg" id="idError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="empName">Full Name</label>
+                            <input type="text" id="empName" name="empName" placeholder="e.g. Jane Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="empSalary">Annual Salary ($)</label>
+                            <input type="number" id="empSalary" name="empSalary" placeholder="e.g. 75000" min="1"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="empGender">Gender</label>
+                            <div class="select-wrapper">
+                                <select id="empGender" name="empGender" required>
+                                    <option value="" disabled selected>Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" id="submitBtn" class="btn btn-primary">Save Employee</button>
+                            <button type="button" id="cancelBtn" class="btn btn-secondary hidden">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Delete Confirmation Modal (Optional but nice) -->
+    <div id="deleteModal" class="modal hidden">
+        <div class="modal-content">
+            <svg class="modal-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444"
+                stroke-width="2">
+                <path d="M3 6h18" />
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                <line x1="10" x2="10" y1="11" y2="17" />
+                <line x1="14" x2="14" y1="11" y2="17" />
+            </svg>
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this employee? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="btn btn-secondary">Cancel</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
